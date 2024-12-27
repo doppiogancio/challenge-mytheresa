@@ -29,9 +29,9 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
             $categories[$categoryName] = $category;
         }
 
-        /** @var array<string,Product> $product */
+        /** @var array<string,Product> $products */
         $products = [];
-        $json = json_decode(file_get_contents(__DIR__ . '/fixtures/products.json'), true);
+        $json = json_decode(file_get_contents(__DIR__.'/fixtures/products.json'), true);
         foreach ($json as $p) {
             $product = $this->createProduct(
                 sku: $p['sku'],

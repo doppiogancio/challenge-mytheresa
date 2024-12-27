@@ -23,8 +23,6 @@ class ProductFinderTest extends WebTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         /** @var DatabaseToolCollection $databaseTool */
         $databaseTool = static::getContainer()->get(DatabaseToolCollection::class);
         $this->databaseTool = $databaseTool->get();
@@ -75,9 +73,7 @@ class ProductFinderTest extends WebTestCase
                         category: 'boots',
                         price: new Price(
                             original: 89000,
-                            final: 62300,
-                            discountPercentage: '30%',
-                            currency: 'EUR'
+                            discount: 30,
                         )
                     ),
                     new Product(
@@ -87,9 +83,7 @@ class ProductFinderTest extends WebTestCase
                         category: 'boots',
                         price: new Price(
                             original: 99000,
-                            final: 69300,
-                            discountPercentage: '30%',
-                            currency: 'EUR'
+                            discount: 30,
                         )
                     ),
                     new Product(
@@ -99,9 +93,7 @@ class ProductFinderTest extends WebTestCase
                         category: 'boots',
                         price: new Price(
                             original: 71000,
-                            final: 49700,
-                            discountPercentage: '30%',
-                            currency: 'EUR'
+                            discount: 30,
                         )
                     ),
                 ])

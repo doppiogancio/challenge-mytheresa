@@ -6,12 +6,12 @@ use App\Search\Dto\FindResponse;
 use App\Search\Dto\QueryString;
 use App\Search\ProductFinder;
 use FOS\RestBundle\View\View;
+use Nelmio\ApiDocBundle\Attribute as ApiDoc;
+use OpenApi\Attributes as OA;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\Routing\Attribute\Route;
-use Nelmio\ApiDocBundle\Attribute as ApiDoc;
-use OpenApi\Attributes as OA;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
@@ -43,11 +43,5 @@ class ApiController extends AbstractController
         });
 
         return View::create($response);
-    }
-
-    #[Route('/debug', name: 'api_debug', methods: ['GET'])]
-    public function debugAction(): void
-    {
-        phpinfo();
     }
 }

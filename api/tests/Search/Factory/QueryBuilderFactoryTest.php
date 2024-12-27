@@ -10,6 +10,7 @@ use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use PHPUnit\Framework\Attributes\DataProvider;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class QueryBuilderFactoryTest extends WebTestCase
 {
@@ -18,8 +19,6 @@ class QueryBuilderFactoryTest extends WebTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         /** @var QueryBuilderFactory $factory */
         $factory = self::getContainer()->get(QueryBuilderFactory::class);
         $this->factory = $factory;
@@ -67,6 +66,7 @@ class QueryBuilderFactoryTest extends WebTestCase
             [
                 'queryString' => new QueryString(priceLessThan: 60000),
                 'expectedSkus' => [
+                    '000003',
                     '000005',
                     '000006',
                 ]

@@ -11,12 +11,12 @@ readonly class QueryString
         public ?string $category = null,
 
         #[SerializedName('priceLessThan')]
-        public ?int    $priceLessThan = null,
-        public int     $page = 1,
+        public ?int $priceLessThan = null,
+        public int $page = 1,
 
         #[Assert\LessThanOrEqual(5)]
         #[SerializedName('pageSize')]
-        public int     $pageSize = 5,
+        public int $pageSize = 5,
     ) {
     }
 }

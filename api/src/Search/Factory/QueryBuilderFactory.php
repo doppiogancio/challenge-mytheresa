@@ -10,7 +10,7 @@ use Doctrine\ORM\QueryBuilder;
 readonly class QueryBuilderFactory
 {
     public function __construct(
-        private ProductRepository $productRepository
+        private ProductRepository $productRepository,
     ) {
     }
 
@@ -32,16 +32,14 @@ readonly class QueryBuilderFactory
         $qb = $this->create($queryString);
 
         // Add pagination
-        if (!is_null($queryString->page) && !is_null($queryString->pageSize)) {
-            $qb->setFirstResult(($queryString->page - 1) * $queryString->pageSize);
-            $qb->setMaxResults($queryString->pageSize);
-        }
+        $qb->setFirstResult(($queryString->page - 1) * $queryString->pageSize);
+        $qb->setMaxResults($queryString->pageSize);
 
         return $qb;
     }
 
     /**
-     * VERY IMPORTANT: do not add pagination and sorting
+     * VERY IMPORTANT: do not add pagination and sorting.
      */
     private function create(QueryString $queryString): QueryBuilder
     {
@@ -60,11 +58,6 @@ readonly class QueryBuilderFactory
                 ->setParameter('category', $queryString->category);
         }
 
-        if (!is_null($queryString->priceLessThan)) {
-            $qb->andWhere('p.price <= :maxPrice')
-                ->setParameter('maxPrice', $queryString->priceLessThan);
-        }
-
         $qb->addGroupBy('p.id');
         $qb->addGroupBy('c.id');
 
@@ -76,6 +69,11 @@ readonly class QueryBuilderFactory
             'p.price',
             'MAX(COALESCE(d.percentage, 0)) as discount',
         ]);
+
+        if (!is_null($queryString->priceLessThan)) {
+            $qb->andWhere('(p.price * (100 - COALESCE(d.percentage, 0)) / 100) <= :maxPrice')
+                ->setParameter('maxPrice', $queryString->priceLessThan);
+        }
 
         return $qb;
     }

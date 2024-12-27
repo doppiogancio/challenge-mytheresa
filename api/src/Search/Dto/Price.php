@@ -2,14 +2,27 @@
 
 namespace App\Search\Dto;
 
-class Price
+readonly class Price
 {
-    public function __construct(
-        private readonly int    $original,
-        private int             $final,
-        private ?string         $discountPercentage = null,
-        private readonly string $currency = 'EUR',
-    ) {
+    private int $original;
+    private int $final;
+    private ?string $discountPercentage;
+    private string $currency;
+
+    public function __construct(int $original, ?int $discount, string $currency = 'EUR')
+    {
+        $this->original = $original;
+        $final = $original;
+        $discountPercentage = null;
+
+        if ((int) $discount > 0) {
+            $final = $original * (100 - $discount) / 100;
+            $discountPercentage = $discount.'%';
+        }
+
+        $this->discountPercentage = $discountPercentage;
+        $this->final = $final;
+        $this->currency = $currency;
     }
 
     public function getOriginal(): int
@@ -30,15 +43,5 @@ class Price
     public function getCurrency(): string
     {
         return $this->currency;
-    }
-
-    public function applyDiscount(?int $discount): void
-    {
-        if (!$discount) {
-            return;
-        }
-
-        $this->final = ($this->getOriginal() * (100 - $discount)) / 100;
-        $this->discountPercentage = sprintf('%d%%', $discount);
     }
 }

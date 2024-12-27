@@ -17,8 +17,6 @@ class ApiControllerTest extends WebTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->client = static::createClient();
 
         /** @var DatabaseToolCollection $databaseTool */

@@ -16,8 +16,6 @@ class PaginationFactoryTest extends WebTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         /** @var PaginationFactory $factory */
         $factory = self::getContainer()->get(PaginationFactory::class);
         $this->factory = $factory;

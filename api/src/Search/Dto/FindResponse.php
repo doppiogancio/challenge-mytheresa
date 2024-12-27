@@ -12,7 +12,7 @@ readonly class FindResponse
     public function __construct(
         public QueryString $queryString,
         public Pagination $pagination,
-        public Collection $products
+        public Collection $products,
     ) {
     }
 }

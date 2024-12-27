@@ -44,14 +44,14 @@ class ManyFakeProductsFixtures extends Fixture implements FixtureGroupInterface
             'Sweaters',
             'T-shirts',
             'Watches',
-            'Wallets'
+            'Wallets',
         ];
 
         $categories = [];
 
         foreach ($categoryNames as $categoryName) {
             $category = new Category();
-            $category->setName($categoryName);
+            $category->setName(strtolower($categoryName));
 
             $manager->persist($category);
             $categories[] = $category;
@@ -65,9 +65,8 @@ class ManyFakeProductsFixtures extends Fixture implements FixtureGroupInterface
             }
         }
 
-
         ini_set('memory_limit', '512M');
-        srand(floor(time() / (60*60*24)));
+        srand(floor(time() / (60 * 60 * 24)));
         foreach ($this->generateProducts($categories, $faker) as $i => $product) {
             $manager->persist($product);
 
@@ -76,7 +75,7 @@ class ManyFakeProductsFixtures extends Fixture implements FixtureGroupInterface
             $discount->setPercentage(rand() % 100);
             $manager->persist($discount);
 
-            if ($i % 100 === 0) {
+            if (0 === $i % 100) {
                 $manager->flush();
             }
         }
@@ -98,5 +97,4 @@ class ManyFakeProductsFixtures extends Fixture implements FixtureGroupInterface
             yield $product;
         }
     }
-
 }

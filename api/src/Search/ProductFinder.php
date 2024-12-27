@@ -8,19 +8,18 @@ use App\Search\Factory\PaginationFactory;
 use App\Search\Factory\ProductCollectionFactory;
 use App\Search\Factory\QueryBuilderFactory;
 use Doctrine\ORM\AbstractQuery;
-use Exception;
 
 readonly class ProductFinder
 {
     public function __construct(
-        private QueryBuilderFactory      $queryBuilderFactory,
+        private QueryBuilderFactory $queryBuilderFactory,
         private ProductCollectionFactory $productCollectionFactory,
-        private PaginationFactory        $paginationFactory,
+        private PaginationFactory $paginationFactory,
     ) {
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function findAll(QueryString $queryString): FindResponse
     {

@@ -4,7 +4,6 @@ namespace App\Search\Factory;
 
 use App\Search\Dto\Pagination;
 use App\Search\Dto\QueryString;
-use Exception;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 readonly class PaginationFactory
@@ -14,7 +13,7 @@ readonly class PaginationFactory
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function create(QueryString $queryString, int $totalItems): Pagination
     {
@@ -31,10 +30,6 @@ readonly class PaginationFactory
         );
     }
 
-    /**
-     * @param QueryString $queryString
-     * @return string
-     */
     public function generatePrevUrl(QueryString $queryString): string
     {
         return $this->router->generate('api_products', array_filter([
@@ -45,10 +40,6 @@ readonly class PaginationFactory
         ]), UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    /**
-     * @param QueryString $queryString
-     * @return string
-     */
     public function generateNextUrl(QueryString $queryString): string
     {
         return $this->router->generate('api_products', array_filter([
