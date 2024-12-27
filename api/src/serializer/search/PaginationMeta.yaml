@@ -1,0 +1,15 @@
+App\Search\Dto\PaginationMeta:
+  exclusion_policy: ALL
+  properties:
+    totalItems:
+      expose: true
+      type: int
+    itemsPerPage:
+      expose: true
+      type: int
+    totalPages:
+      expose: true
+      type: int
+    currentPage:
+      expose: true
+      type: int

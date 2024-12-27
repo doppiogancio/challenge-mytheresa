@@ -1,0 +1,17 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+    #http_method_override: false
+    test: true
+    session:
+        handler_id: 'session.handler.native_file'
+        cookie_secure: 'auto'
+        cookie_samesite: 'lax'
+        storage_factory_id: session.storage.factory.native
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

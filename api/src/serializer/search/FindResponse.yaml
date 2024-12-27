@@ -1,0 +1,12 @@
+App\Search\Dto\FindResponse:
+  exclusion_policy: ALL
+  properties:
+    queryString:
+      expose: true
+      type: App\Search\Dto\QueryString
+    pagination:
+      expose: true
+      type: App\Search\Dto\Pagination
+    products:
+      expose: true
+      type: ArrayCollection<App\Search\Dto\Product>

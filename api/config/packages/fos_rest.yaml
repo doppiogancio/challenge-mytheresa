@@ -1,0 +1,18 @@
+fos_rest:
+    param_fetcher_listener: 'force'
+
+    view:
+        view_response_listener: 'force'
+
+    service:
+      serializer: "fos_rest.serializer.jms"
+
+    serializer:
+        serialize_null: true
+
+    format_listener:
+        enabled: true
+        rules:
+            - { path: '^/products', prefer_extension: true, fallback_format: json, priorities: [ json, '*/*' ] }
+            - { path: '^/', priorities: ['html'], fallback_format: html }
+            - { path: '^/api/doc', priorities: ['html'], fallback_format: html }

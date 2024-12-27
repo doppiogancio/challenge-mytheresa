@@ -1,0 +1,11 @@
+snc_redis:
+  clients:
+    api_kv_storage:
+      type: predis
+      dsn: "redis://%env(REDIS_HOST)%:%env(REDIS_PORT)%/0"
+      options:
+        prefix: mytheresa_
+
+services:
+  admin_kv_storage:
+    alias: snc_redis.api_kv_storage

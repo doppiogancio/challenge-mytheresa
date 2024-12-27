@@ -1,0 +1,15 @@
+App\Search\Dto\Product:
+  exclusion_policy: ALL
+  properties:
+    sku:
+      expose: true
+      type: string
+    name:
+      expose: true
+      type: string
+    category:
+      expose: true
+      type: string
+    price:
+      expose: true
+      type: App\Search\Dto\Price

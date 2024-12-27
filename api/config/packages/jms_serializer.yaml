@@ -1,0 +1,37 @@
+jms_serializer:
+  metadata:
+    auto_detection: false
+    directories:
+      entity:
+        namespace_prefix: "App\\Entity"
+        path: "%kernel.project_dir%/src/serializer/entity"
+      search:
+        namespace_prefix: "App\\Search\\Dto"
+        path: "%kernel.project_dir%/src/serializer/search"
+    warmup:
+      paths:
+        included:
+          - "%kernel.project_dir%/src/Entity"
+          - "%kernel.project_dir%/src/Search/Dto"
+
+  visitors:
+    xml_serialization:
+      format_output: '%kernel.debug%'
+
+
+when@prod:
+  jms_serializer:
+    visitors:
+      json_serialization:
+        options:
+          - JSON_UNESCAPED_SLASHES
+          - JSON_PRESERVE_ZERO_FRACTION
+
+when@dev:
+  jms_serializer:
+    visitors:
+      json_serialization:
+        options:
+          - JSON_PRETTY_PRINT
+          - JSON_UNESCAPED_SLASHES
+          - JSON_PRESERVE_ZERO_FRACTION

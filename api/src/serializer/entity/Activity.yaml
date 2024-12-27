@@ -1,0 +1,36 @@
+App\Entity\Activity:
+  exclusion_policy: ALL
+  virtual_properties:
+    # We need the email for backwards compatibility
+    formattedPrice:
+      expose: true
+      type: string
+      exp: "service('app.currency.formatter').format(object.getCurrency(), object.getPrice())"
+  properties:
+    id:
+      expose: true
+      type: int
+    title:
+      expose: true
+      type: string
+    mainImage:
+      expose: true
+      type: string
+    description:
+      expose: true
+      type: string
+    price:
+      expose: true
+      type: float
+    currency:
+      expose: true
+      type: string
+    rating:
+      expose: true
+      type: float
+    specialOffer:
+      expose: true
+      type: bool
+    supplier:
+      expose: true
+      type: App\Entity\Supplier

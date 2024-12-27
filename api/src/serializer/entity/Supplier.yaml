@@ -1,0 +1,24 @@
+App\Entity\Supplier:
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: int
+    name:
+      expose: true
+      type: string
+    address:
+      expose: true
+      type: string
+    zip:
+      expose: true
+      type: string
+    code:
+      expose: true
+      type: string
+    city:
+      expose: true
+      type: string
+    country:
+      expose: true
+      type: string
